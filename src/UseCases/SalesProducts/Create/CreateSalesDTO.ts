@@ -1,6 +1,6 @@
-export interface CreateSalesDTO{
+export interface CreateSalesDTO {
     idProduct: string;
     idUser: string;
-    Quantity: number; 
+    Quantity: number;
     price?: number
 };

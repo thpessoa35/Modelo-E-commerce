@@ -3,45 +3,52 @@ import { IProdutcsRepository } from "../../../Repository/Services/ProductsReposi
 import { ISalesProductsRepository } from "../../../Repository/Services/SalesProducts";
 import { CreateSalesDTO } from "./CreateSalesDTO";
 
-export class CreateSalesProductsUseCase{
+export class CreateSalesProductsUseCase {
     constructor(
-       private iSalesProductsRepository: ISalesProductsRepository,
-       private iProductRepostory: IProdutcsRepository
-    ){}
-    
-    async CreateSalesProducts(data: CreateSalesDTO){
+        private iSalesProductsRepository: ISalesProductsRepository,
+        private iProductRepostory: IProdutcsRepository
+    ) { }
 
-        const productsExists = await this.iProductRepostory.GetProductsID(data.idProduct);
+    async CreateSalesProducts(data: CreateSalesDTO) {
 
-        const productPrice = await this.iProductRepostory.GetStockPrice(data.idProduct);
+        try {
+
+            const productsExists = await this.iProductRepostory.GetProductsID(data.idProduct);
+
+            const productPrice = await this.iProductRepostory.GetStockPrice(data.idProduct);
 
 
-        if(!productsExists){
-            throw new Error(`Produto com ID ${data.idProduct} não encontrado.`);
-        };
-        
-        const stockQuantity = await this.iProductRepostory.GetStockQuantity(data.idProduct);
+            if (!productsExists) {
+                throw { type: 'ProductNotFound', message: `Produto com ID ${data.idProduct} não encontrado.` };
+            };
 
-        if(stockQuantity < data.Quantity){
-            throw new Error(`Quantidade insuficiente em estoque para o produto com ID ${data.idProduct}.`);
-        };
-        
-        if(stockQuantity >= data.Quantity){
-            
-            const newStockQuantity = stockQuantity - data.Quantity;
+            const stockQuantity = await this.iProductRepostory.GetStockQuantity(data.idProduct);
 
-            await this.iProductRepostory.updateProductStock(data.idProduct, newStockQuantity);
+            if (stockQuantity < data.Quantity) {
 
-            
-            
-            const salesProducts = new SalesProducts({
+                throw { type: 'InsufficientStock', message: `Quantidade insuficiente em estoque para o produto com ID ${data.idProduct}.` }
+
+            };
+
+            if (stockQuantity >= data.Quantity) {
+
+                const newStockQuantity = stockQuantity - data.Quantity;
+
+                await this.iProductRepostory.updateProductStock(data.idProduct, newStockQuantity);
+
+
+
+                const salesProducts = new SalesProducts({
                     idProduct: data.idProduct,
                     idUser: data.idUser,
                     Quantity: data.Quantity,
                     price: productPrice
-            });
-             
-            await this.iSalesProductsRepository.CreateSalesProducts(salesProducts);
-        };
-    };
+                });
+
+                await this.iSalesProductsRepository.CreateSalesProducts(salesProducts);
+            };
+        } catch (error) {
+            throw error;
+        }
+    }
 };

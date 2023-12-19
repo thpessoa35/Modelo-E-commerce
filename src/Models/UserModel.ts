@@ -15,7 +15,7 @@ class UserModel extends Model {
 }
 
 UserModel.init(
-  {
+{
     id: {
       type: DataTypes.STRING,
       primaryKey: true,

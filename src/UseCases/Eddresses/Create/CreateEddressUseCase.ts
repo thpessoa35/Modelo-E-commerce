@@ -9,8 +9,8 @@ export class CreateEddressesUseCase{
     ){}
     async saveEddresses(createEddressDTO:CreateEddressDTO){
 
-        const user = new Eddress(createEddressDTO)
+        const user = new Eddress(createEddressDTO);
 
-        await this.iDdressesRepository.saveEddresses(user)
+        await this.iDdressesRepository.saveEddresses(user);
     };
 };

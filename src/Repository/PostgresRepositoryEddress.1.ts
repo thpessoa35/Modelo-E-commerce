@@ -8,7 +8,7 @@ import EddressModel from "../Models/EddressModel";
 export class PostgresRepositoryEddress implements IDdressesRepository {
 
   async GetEddresses(): Promise<Eddress[]> {
-    const eddressList = await EddressModel.findAll();
+    const eddressList = await EddressModel.findAll(); 
     return eddressList;
   };
 
