@@ -3,9 +3,9 @@ import { SalesProducts } from '../../Entities/SalesProduct'
 export interface ISalesProductsRepository {
 
     GetSalesProducts(): Promise<SalesProducts[]>;
-    GetIDSalesProducts(idSales: string): Promise<SalesProducts | null>;
-    UpdateSalesProducts(idSales: string, data: SalesProducts): Promise<void>;
-    DeleteSalesProducts(idSales: string): Promise<SalesProducts | null>;
+    GetIDSalesProducts(idSale: string): Promise<SalesProducts | null>;
+    UpdateSalesProducts(idSale: string, data: SalesProducts): Promise<void>;
+    DeleteSalesProducts(idSale: string): Promise<SalesProducts | null>;
     CreateSalesProducts(data: SalesProducts): Promise<void>;
 
 };  

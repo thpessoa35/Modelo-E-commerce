@@ -1,6 +1,6 @@
 import { IProdutcsRepository } from "./Services/ProductsRepository";
 import { Products } from "../../src/Entities/Products";
-import { ProductsModel } from "../Models/ProductsModel";
+import  ProductsModel  from "../Models/ProductsModel";
 
 
 

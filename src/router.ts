@@ -15,6 +15,7 @@ import { updateProductController } from "./UseCases/Products/Update";
 import { getIDProductController } from "./UseCases/Products/GetID";
 import { createSalesProductsController } from "./UseCases/SalesProducts/Create";
 import { getIDSalesProductsController } from "./UseCases/SalesProducts/GetID";
+import { getSalesProductsController } from "./UseCases/SalesProducts/Get";
 
 
 const router = express.Router();
@@ -65,7 +66,10 @@ router.get('/products/:idProduct', (req, res)=>{
 router.post('/salesProducts/idUser/idProducts', (req, res)=>{
     return createSalesProductsController.CreateSalesProducts(req, res)
 });
-router.get('/salesProducts/:idSales', (req, res)=>{
+router.get('/salesProducts', (req, res)=>{
+    return getSalesProductsController.GetProductsSales(req, res)
+})
+router.get('/salesProducts/:idSale', (req, res)=>{
     return getIDSalesProductsController.GetIDSalesProduct(req, res)
 })
 

@@ -2,7 +2,7 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../Database/pg';
 import EddressModel from './EddressModel';
-import { SalesProductsModel } from './SalesProduct';
+import  SalesProductsModel  from './SalesProduct';
 
 class UserModel extends Model {
   public id!: string;
@@ -43,8 +43,11 @@ UserModel.init(
   }
 );
 
-UserModel.hasMany(EddressModel, { foreignKey: 'idUser', as: 'addresses' });
-UserModel.hasMany(SalesProductsModel, { foreignKey: 'idUser', as: 'sales' });
+UserModel.hasMany(EddressModel, { foreignKey: 'idUser' });
+EddressModel.belongsTo(UserModel, { foreignKey: 'idUser' });
+
+UserModel.hasMany(SalesProductsModel, { foreignKey: 'idUser' });
+SalesProductsModel.belongsTo(UserModel, { foreignKey: 'idUser' });
 
 export default UserModel;
 

@@ -1,6 +1,5 @@
 
 import { IUserRepository } from "../../../Repository/Services/UserRepository";
-import { User } from "../../../entities/User";
 import { IGetRequestDTO } from "./GetUserDTO";
 
 export class GetUserUseCase{

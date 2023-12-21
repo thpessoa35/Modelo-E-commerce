@@ -3,8 +3,21 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --inspect --transpile-only ./src/index.ts",
+    "dev": "nodemon -L --inspect=0.0.0.0:9229 --exec ts-node-dev --transpile-only ./src/index.ts",
     "test": "jest"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "node_modules",
+      "dist"
+    ],
+    "watch": [
+      "src"
+    ],
+    "exec": "ts-node-dev --transpile-only src/index.ts",
+    "events": {
+      "restart": "echo 'App restarted due to: $FILENAME'"
+    }
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +26,7 @@
     "@types/jest": "^29.5.11",
     "@types/sequelize": "^4.28.19",
     "@types/yargs": "^17.0.32",
+    "nodemon": "^3.0.2",
     "pg": "^8.11.3",
     "sequelize": "^6.35.1",
     "sequelize-cli": "^6.6.2",

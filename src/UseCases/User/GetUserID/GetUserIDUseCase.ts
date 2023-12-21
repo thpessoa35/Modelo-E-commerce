@@ -1,5 +1,5 @@
-import { IUserRepository } from "../../Repository/UserRepository";
-import { User } from "../../entities/User";
+import { IUserRepository } from "../../../Repository/Services/UserRepository";
+
 import { GetIDUserDTO } from "./GetIDUserDTO";
 
 

@@ -1,5 +1,7 @@
 import { SalesProducts } from "../Entities/SalesProduct";
-import { SalesProductsModel } from "../Models/SalesProduct";
+import ProductsModel from "../Models/ProductsModel";
+import  SalesProductsModel  from "../Models/SalesProduct";
+import UserModel from "../Models/UserModel";
 import { ISalesProductsRepository } from "./Services/SalesProducts";
 
 
@@ -8,12 +10,26 @@ export class PostgresRepositorySalesProducts implements ISalesProductsRepository
         const findAll = await SalesProductsModel.findAll()
         return findAll as any;
     }
-    async GetIDSalesProducts(idSales: string): Promise<SalesProducts | null> {
-        const findID = await SalesProductsModel.findByPk(idSales,{
-            include: {association: 'product'}
-        });
+    async GetIDSalesProducts(idSale: string): Promise<SalesProducts | null> {
+        try {
+            const sale = await SalesProductsModel.findByPk(idSale, {
+              include: [
+                {
+                  model: ProductsModel,
+                  attributes: ['idProduct', 'nameProduct', 'category', 'description', 'price', 'stockQuantity'],
+                },
+                {
+                  model: UserModel,
+                  attributes: ['id', 'name', 'email'],
+                },
+              ],
+            });
         
-        return findID as any;             
+            return sale as any
+          } catch (error) {
+            console.error('Erro ao buscar venda com características do produto e do usuário:', error);
+            return null
+          }     
     }                   
 
     async UpdateSalesProducts(idSales: string, data: SalesProducts): Promise<void> {

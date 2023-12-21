@@ -1,4 +1,4 @@
-import { IUserRepository } from "../../../Services/UserRepository";
+import { IUserRepository } from "../../../Repository/Services/UserRepository";
 import { DeleteUserDTO } from "./DeleteUserDTO";
 
 export class DeleteUserUseCase{

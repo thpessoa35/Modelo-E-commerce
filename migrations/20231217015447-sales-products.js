@@ -13,7 +13,7 @@ module.exports = {
         idProduct: {
           type: Sequelize.STRING,
           allowNull: false,
-          references: {model: 'products',key: 'idProduct'}
+          references: {model: 'products' ,key: 'idProduct'}
         },
         idUser: {
           type: Sequelize.STRING,
@@ -27,6 +27,13 @@ module.exports = {
         totalPrice: {
           type: Sequelize.DECIMAL(10,2),
           allowNull: false
+        },createdAt: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
+        updatedAt: {
+          type: Sequelize.DATE,
+          allowNull: false,
         }
       });
     

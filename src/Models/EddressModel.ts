@@ -46,7 +46,7 @@ EddressModel.init({
   timestamps: true,
 });
 
-EddressModel.belongsTo(EddressModel, { foreignKey: 'idUser', as: 'user' });
+
 
 
 export default EddressModel;

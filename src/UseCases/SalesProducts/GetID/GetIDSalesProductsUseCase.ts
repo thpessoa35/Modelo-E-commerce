@@ -1,15 +1,18 @@
 import { ISalesProductsRepository } from "../../../Repository/Services/SalesProducts";
 import { GetIDSalesProductDTO } from "./GetIDSales.DTO";
 
-export class GetIDSalesProductsUseCase{
+export class GetIDSalesProductsUseCase {
     constructor(
         private iSalesProductsRepository: ISalesProductsRepository,
-    ){}
+    ) {}
 
-    async GetIDSalesProducts(data: GetIDSalesProductDTO){
+    async GetIDSalesProducts(data: GetIDSalesProductDTO) {
+        try {
+            const idsales = await this.iSalesProductsRepository.GetIDSalesProducts(data.idSale)
 
-      const idsales = await this.iSalesProductsRepository.GetIDSalesProducts(data.idSale);
-
-      return idsales
-    };
-};
+            return idsales;
+        } catch (error ) {
+            throw new Error(`Erro ao obter ID de venda: `);
+        }
+    }
+}

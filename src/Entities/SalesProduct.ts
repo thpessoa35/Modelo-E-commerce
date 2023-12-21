@@ -8,14 +8,19 @@ export class SalesProducts {
     public totalPrice: number;
     public price: number
 
-    constructor(props: Omit<SalesProducts, 'idSale' | 'totalPrice'>) {
+    constructor(props: Omit<SalesProducts, 'idSale' | 'totalPrice'>, idSale?: string) {
 
-        this.idSale = uuidv4();
         this.idProduct = props.idProduct;
         this.idUser = props.idUser;
         this.Quantity = props.Quantity;
         this.price = props.price;
         this.totalPrice = this.CalculeteTotalPrice( this.price, this.Quantity);
+
+        if(!idSale){
+            this.idSale = uuidv4()
+        } else {
+            this.idSale = idSale
+        }
         
     };
 
