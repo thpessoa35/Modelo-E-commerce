@@ -7,6 +7,11 @@ export class DeleteUserUseCase{
     ){}
 
     async DeleteUser(data: DeleteUserDTO){
+
+        const findID = await this.userRepository.GetUserID(data.id);
+        if(!findID){
+            throw {type: 'UserFindID', message: 'Usuario não encontrado'}
+        }
         
         const user = await this.userRepository.Delete(data.id)
         return user;

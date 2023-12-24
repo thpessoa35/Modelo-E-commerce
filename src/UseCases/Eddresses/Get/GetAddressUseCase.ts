@@ -8,10 +8,14 @@ export class GetAddressUseCase {
       try {
         const addresses = await this.iUEddressRepository.GetUserEddresses(save.idUser);
   
+        if(addresses === null){
+          throw {type:'ErrorAssociate', message:'Erro ao associar Usuario.'};
+        };
+
         return addresses;
         
-      } catch (err) {
-        throw err;
+      } catch (error) {
+        throw error;
       }
     }
   }

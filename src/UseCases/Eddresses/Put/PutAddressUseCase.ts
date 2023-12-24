@@ -6,8 +6,18 @@ export class PutAddressUseCase{
        private iEddressRepository: IDdressesRepository
     ){}
     async UpdateEddresss(data: PutAdressDTO){
-        const PutAddress = await this.iEddressRepository.UpdateEddress(data.idEdresses, data);
+        try{
+            const findByPk = await this.iEddressRepository.GetEddressID(data.idEdresses)
 
-        return PutAddress;
+            if(!findByPk){
+                throw { type:'IdEddressNotFound', message:'Endereço não encontrado.'};
+            }
+
+            await this.iEddressRepository.UpdateEddress(data.idEdresses, data);
+    
+        }
+        catch(error){
+            throw error
+        }
     }
 }

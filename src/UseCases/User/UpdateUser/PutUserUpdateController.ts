@@ -9,15 +9,15 @@ export class PutUserUpdateController {
         try {
             const { id, name, email, password }: PutUserDTO = req.body;
 
-            // Valide os dados conforme necessário...
 
-            // Chame o caso de uso para atualizar o usuário
             await this.updateUserUseCase.UpdateUser({ id, name, email, password });
 
             return res.json({ message: 'Usuário atualizado com sucesso' });
-        } catch (error) {
-            console.error("Erro ao atualizar usuário:", error);
-            return res.status(500).json({ error: "Erro interno do servidor" });
+        } catch (error: any) {
+            if(error.type === 'UserNotFound'){
+                return res.json({error: error.message});
+            };
+            return res.status(400)
         }
     }
 }

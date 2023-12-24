@@ -46,7 +46,7 @@ ProductsModel.init({
   timestamps: true,
 });
 
-ProductsModel.hasMany(SalesProductsModel, { foreignKey: 'idProduct' });
+ProductsModel.hasMany(SalesProductsModel, { foreignKey: 'idProduct', as: 'sales' });
 SalesProductsModel.belongsTo(ProductsModel, { foreignKey: 'idProduct' });
 
 

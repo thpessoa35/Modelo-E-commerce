@@ -9,8 +9,15 @@ export class CreateProductsUseCase{
     ){}
     async CreateProducts(data: CreateProductsDTO){
         
-        const products = new Products(data);
+        try{
 
-        await this.iProdutcsRepository.save(products);
+            const products = new Products(data);
+
+            await this.iProdutcsRepository.save(products);
+
+        }catch(error){
+            throw {type:'ErrorCreateProduct', message: 'Erro ao criar produto'}
+        }
+
     }
 }

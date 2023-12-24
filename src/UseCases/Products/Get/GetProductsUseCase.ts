@@ -6,7 +6,19 @@ export class GetProductsUseCase{
         private iProdutcsRepository : IProdutcsRepository
     ){}
     async GetProducts(data: GetProductsDTO) {
-       const find = await this.iProdutcsRepository.GetProducts()
-       return find
+
+        try{
+
+            const find = await this.iProdutcsRepository.GetProducts();
+
+            if(!find){
+                throw {type: 'ErrorGetProducts', message: 'Erro ao consultar Produtos.'}
+            }
+
+            return find
+            
+        }catch(error){
+            throw error
+        }
     }
 }

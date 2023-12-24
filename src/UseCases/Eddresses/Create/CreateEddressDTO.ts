@@ -1,4 +1,4 @@
-export interface CreateEddressDTO{
+export interface CreateEddressDTO {
     idUser: string;
     rua: string;
     bairro: string;

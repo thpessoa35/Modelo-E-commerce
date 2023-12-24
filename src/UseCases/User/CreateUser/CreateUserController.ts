@@ -16,9 +16,11 @@ export class CreateUserController {
 
       return res.json({message: "Usuario Criado com sucesso"});
 
-    } catch (error) {
-      console.error('Erro ao processar requisição:', error);
-      return res.status(500).json({ error: 'Erro interno do servidor' });
+    } catch (error: any) {
+        if(error.type === 'alrady Exist'){
+          return res.json({ error: error.message })
+        }
+      return res.status(400).json({error})  
     }
   }
 }

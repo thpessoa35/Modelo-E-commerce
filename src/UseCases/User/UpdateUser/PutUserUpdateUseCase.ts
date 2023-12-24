@@ -11,7 +11,7 @@ export class PutUserUpdateUseCase {
         const existingUser = await this.usersRepository.GetUserID(data.id);
 
         if (!existingUser) {
-            throw new Error("User not found.");
+            throw {type: 'UserNotFound', message: 'Usuario não encontrado.'}
         }
 
         

@@ -1,6 +1,7 @@
 // EddressModel.ts
 import { DataTypes, Model } from 'sequelize';
 import Sequelize from '../Database/pg';
+import UserModel from './UserModel';
 
 class EddressModel extends Model {
   public idEdresses!: string;
@@ -45,7 +46,6 @@ EddressModel.init({
   modelName: 'eddresses',
   timestamps: true,
 });
-
 
 
 

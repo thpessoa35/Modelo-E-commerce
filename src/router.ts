@@ -53,7 +53,7 @@ router.get('/products', (req, res)=>{
 router.post('/products', (req, res)=>{
     return createProductsController.Create(req,res)
 });
-router.delete('/products', (req, res)=>{
+router.delete('/products/:idProduct', (req, res)=>{
     return deleteProductsController.Delete(req ,res)
 });
 router.put('/products/:idProduct', (req, res)=>{

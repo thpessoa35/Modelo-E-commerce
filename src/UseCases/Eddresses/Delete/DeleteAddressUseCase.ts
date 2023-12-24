@@ -2,17 +2,23 @@ import { IDdressesRepository } from "../../../Repository/Services/EddressReposit
 import { DeleteAddressDTO } from "./DeleteAddressDTO";
 
 
-export class DeleteAddressUseCase{
+export class DeleteAddressUseCase {
     constructor(
-        private iDdressesRepository:IDdressesRepository
-    ){}
-    async DeleteEddresses(data: DeleteAddressDTO){
-        
+        private iDdressesRepository: IDdressesRepository
+    ) { }
+    async DeleteEddresses(data: DeleteAddressDTO) {
 
-        const deleteEddress = await this.iDdressesRepository.DeleteEddress(data.idEdresses)
-        if(!deleteEddress){
-            console.error('error na busca de IdEddress')
+        try{
+
+            const deleteEddress = await this.iDdressesRepository.DeleteEddress(data.idEdresses)
+    
+            if (!deleteEddress) {
+                throw {type:'IdEddressNotFound', message:'IdEddress não Encontrado.'}
+            }
+            return deleteEddress;
+
+        }catch(error){
+            throw error
         }
-        return deleteEddress;
     }
 }

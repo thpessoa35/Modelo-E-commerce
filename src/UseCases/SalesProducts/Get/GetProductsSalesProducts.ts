@@ -5,8 +5,14 @@ export class GetProductsSalesUseCase{
         private iSalesProductsRepository: ISalesProductsRepository, 
     ){}
     async getProductsSales(){
-       const produtcSales  = await this.iSalesProductsRepository.GetSalesProducts()
+        try{
+            
+            const produtcSales  = await this.iSalesProductsRepository.GetSalesProducts()
+            
+            return produtcSales
+        }catch(error){
+            throw error
+        }
 
-       return produtcSales
     }
 }

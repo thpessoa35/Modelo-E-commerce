@@ -2,26 +2,27 @@
 import { GetIDProductUseCase } from "./GetIDProductUseCase";
 import { Response, Request } from "express";
 
-export class GetIDProductController{
+export class GetIDProductController {
     constructor(
-       private getIDProductUseCase: GetIDProductUseCase
-    ){}
-    async GetProductsID(req:Request, res: Response): Promise<Response>{
-        
-        try{
-            const { idProduct } = req.params
-    
+        private getIDProductUseCase: GetIDProductUseCase
+    ) { }
+    async GetProductsID(req: Request, res: Response): Promise<Response> {
 
-            const getid = await this.getIDProductUseCase.GetProductsID({idProduct})
-            if(!getid){
-                return res.json({message: 'id nao correspondente'})
-            }
+        try {
+            const { idProduct } = req.params
+
+            const getid = await this.getIDProductUseCase.GetProductsID({ idProduct });
+
             return res.json(getid)
 
-        }catch(err){
-            return res.status(404).json({message:'Erro ao consultar Produto'})
+        } catch (error: any) {
+            if (error.type === 'ErrorGetID') {
+                return res.json({ message: error.message })
+            }
+
+            return res.status(400).send()
         }
 
-        }
+    }
 
 }

@@ -15,8 +15,11 @@ export class DeleteUserController {
 
             return res.json({ message: 'Usuário deletado com sucesso.'});
             
-        } catch (error) {
-            return res.status(404).json({ message: 'Usuário não encontrado.', error });
+        } catch (error: any) {
+            if(error.type === 'UserFindID'){
+                return res.json({error: error.message})
+            }
+            return res.status(400)
         }
     }
-}
+};

@@ -17,9 +17,9 @@ export class PostgresRepositoryEddress implements IDdressesRepository {
     return eddress;
   };
 
-  async GetUserByID(idUser: string): Promise<Eddress | null>{
-    const findID = await EddressModel.findByPk(idUser);
-    return findID
+  async GetUserByID(id: string): Promise<Eddress | null>{
+    const findID = await UserModel.findByPk(id);
+    return findID as any
   }
 
   async DeleteEddress(idEdresses: string): Promise<Eddress | null> {

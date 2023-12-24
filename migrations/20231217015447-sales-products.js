@@ -13,12 +13,16 @@ module.exports = {
         idProduct: {
           type: Sequelize.STRING,
           allowNull: false,
-          references: {model: 'products' ,key: 'idProduct'}
+          references: {model: 'products' ,key: 'idProduct'},
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
         },
         idUser: {
           type: Sequelize.STRING,
           allowNull: false,
-          references: {model: 'users', key: 'id'}
+          references: {model: 'users', key: 'id'},
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
         },
         Quantity: {
           type: Sequelize.INTEGER,

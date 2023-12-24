@@ -19,9 +19,11 @@ export class CreateProductsController{
             });
     
             return res.json({ message: 'Produto criado com sucesso!' });
-        } catch (error) {
-            console.error('Erro ao criar produto:', error);
-            return res.status(500).json({ message: 'Erro interno ao criar produto.' });
+        } catch (error: any) {
+            if(error.type === 'ErrorCreateProduct'){
+                return res.json({message: error.message})
+            }
+            return res.status(400).send()
         }
     }
 }

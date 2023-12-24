@@ -1,6 +1,6 @@
 import { IProdutcsRepository } from "./Services/ProductsRepository";
 import { Products } from "../../src/Entities/Products";
-import  ProductsModel  from "../Models/ProductsModel";
+import ProductsModel from "../Models/ProductsModel";
 
 
 
@@ -39,30 +39,29 @@ export class PostgresRepositoryProducts implements IProdutcsRepository {
 
   async GetStockQuantity(idProduct: string): Promise<number> {
     const product = await ProductsModel.findByPk(idProduct);
-  
+
     if (!product) {
       throw new Error(`Produto com ID ${idProduct} não encontrado.`);
     }
-  
+
     return product.stockQuantity;
   }
-  
+
   async updateProductStock(idProduct: string, newStockQuantity: number): Promise<void> {
 
     await ProductsModel.update({ stockQuantity: newStockQuantity }, { where: { idProduct } });
-}
+  }
 
   async GetStockPrice(idProduct: string): Promise<number> {
 
     const productPrice = await ProductsModel.findByPk(idProduct);
 
     if (!productPrice) {
-     throw new Error(`Price não ${idProduct} não encontrado.`);
-   }
+      throw new Error(`Price não ${idProduct} não encontrado.`);
+    }
 
     return productPrice.price;
-}
-
+  }
 }
 
 

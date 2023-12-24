@@ -43,11 +43,12 @@ UserModel.init(
   }
 );
 
-UserModel.hasMany(EddressModel, { foreignKey: 'idUser' });
+UserModel.hasMany(EddressModel, { foreignKey: 'idUser', as: 'addresses' });
 EddressModel.belongsTo(UserModel, { foreignKey: 'idUser' });
 
-UserModel.hasMany(SalesProductsModel, { foreignKey: 'idUser' });
+UserModel.hasMany(SalesProductsModel, { foreignKey: 'idUser', as:'iduser' });
 SalesProductsModel.belongsTo(UserModel, { foreignKey: 'idUser' });
+
 
 export default UserModel;
 

@@ -7,7 +7,19 @@ export class UpdateProductUseCase{
     ){}
 
     async UpdateProduct(data: UpdateProductDTO) {
-           const update = await this.iProdutcsRepository.UpdateProducts(data.idProduct, data)
-           return update
+
+        try{
+            const findID = await this.iProdutcsRepository.GetProductsID(data.idProduct);
+
+            if(!findID){
+                throw {type: 'GetIDProduct', message:'Erro ao consultar Produto.'}
+            };
+
+             this.iProdutcsRepository.UpdateProducts(data.idProduct, data)
+
+
+        }catch(error){
+            throw error
+        }
     }
 }

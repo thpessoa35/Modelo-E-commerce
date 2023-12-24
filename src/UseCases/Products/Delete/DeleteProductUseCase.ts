@@ -5,11 +5,21 @@ import { DeleteProductDTO } from "./DeleteProductDTO";
 export class DeleteProductUseCase {
     constructor(
         private iProdutcsRepository: IProdutcsRepository
-    ) {}
+    ) { }
     async DeleteProducts(data: DeleteProductDTO) {
+        try {
 
-        const deleteProduct = await this.iProdutcsRepository.GetProductsID(data.idProduct)
+            const deleteProduct = await this.iProdutcsRepository.GetProductsID(data.idProduct);
 
-        return deleteProduct;
-    }
-}
+            if (!deleteProduct) {
+                throw { type: 'idProductNotFound', message: 'Produto não encontrado.' };
+            };
+
+            return deleteProduct;
+
+        } catch (error) {
+            throw error;
+        };
+
+    };
+};
